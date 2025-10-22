@@ -1,0 +1,77 @@
+commit f1afece7633da2cbe20aca3b1491e14473721caf
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Wed Oct 22 05:30:27 2025 +0200
+
+    add documentation
+
+commit d8581127117a5754359b30ac4422be6315296e71
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Wed Oct 22 05:23:57 2025 +0200
+
+    added build definition
+
+commit 8d28decf167d4f3b1ff154d7ca0c87e2a4badac0
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Wed Oct 22 05:23:02 2025 +0200
+
+    added component integration tests
+
+commit 09dcf705c488ee493c17e733c1b3f5c1946190f1
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 18:22:26 2025 +0200
+
+    Added a robot controller that executes robot instructions initializing command mappings, creating a grid and initializing scent tracking
+
+commit ae19aae1a1ef54b025e3817d3fe8dcb73a697e28
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 18:00:17 2025 +0200
+
+    added move forward command and tests
+
+commit 25ef825afded07e2d455b3b2c5e43917713ec63e
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 17:16:54 2025 +0200
+
+    added turn commands with tests, updated command interface doc comment
+
+commit bf90658901a9bb6a5b6146f349db904eaae1e563
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 16:46:29 2025 +0200
+
+    add helper for getting the robot to move in the right direction with decent documentation explaining the move logic
+
+commit a2c0196474050821424ef60e607150d0ed0d9fd1
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 15:54:18 2025 +0200
+
+    add interface, implementation and tests for exploration surface area grid
+
+commit cb95d2be8656dcd262f687e9754b356158428ee7
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 15:35:20 2025 +0200
+
+    add robot poisition and tests
+
+commit 15d9ff793d8460ae479bf0f1364616587c3fef00
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 15:16:07 2025 +0200
+
+    added interface, implementation and tests for scent tracking
+
+commit 4f90bdc321c3f3173ee15ab4b41fb188f10b7ee2
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Tue Oct 21 06:00:41 2025 +0200
+
+    added happy path tests for the concrete implementation of RobotState
+
+commit 87f5d7bc9b65ba5cada4af1b4d49ab6eb6e31434
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Mon Oct 20 17:25:27 2025 +0200
+
+    Add RobotStateConc implementation of RobotState interface
+
+commit 97d5c47fc41e2a074863614b9cb0bb4892d4d50e
+Author: Ryan Greenwood <ryngrnwd@amazon.com>
+Date:   Mon Oct 20 17:17:59 2025 +0200
+
+    add RobotState interface for robot position and orientation tracking
