@@ -71,6 +71,11 @@ Maven Commands
 - mvn clean test # Clean, compile, test, and generate coverage report
 - open target/site/jacoco/index.html  # View coverage report in browser
 
+Running the Application
+
+- mvn compile exec:java -Dexec.mainClass="MartianRobotsMain"  # Compile and run the main application
+- java -cp target/classes MartianRobotsMain  # Run after compiling with mvn compile
+
 Test Coverage
 
 The project uses JaCoCo for test coverage analysis. After running tests, coverage reports are generated in:
