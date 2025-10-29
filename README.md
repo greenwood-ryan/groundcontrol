@@ -67,5 +67,15 @@ Maven Commands
 
 - mvn clean     # Remove all compiled files and build artifacts
 - mvn compile   # Convert Java source code into executable class files
-- mvn test      # Run all unit and integration tests
-- mvn clean compile test  # Clean, compile, and test in one command
+- mvn test      # Run all unit and integration tests with coverage analysis
+- mvn clean test # Clean, compile, test, and generate coverage report
+- open target/site/jacoco/index.html  # View coverage report in browser
+
+Test Coverage
+
+The project uses JaCoCo for test coverage analysis. After running tests, coverage reports are generated in:
+- HTML Report: target/site/jacoco/index.html (open in browser)
+- CSV Report: target/site/jacoco/jacoco.csv (for CI/CD integration)
+- XML Report: target/site/jacoco/jacoco.xml (for tools like SonarQube)
+
+Current Coverage: 96% instruction coverage, 86% branch coverage
