@@ -16,6 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.2</junit.version>
         <jacoco.version>0.8.8</jacoco.version>
+        <spotbugs.version>4.8.3.1</spotbugs.version>
+        <checkstyle.version>3.2.1</checkstyle.version>
     </properties>
     
     <dependencies>
@@ -126,7 +128,78 @@
                             </arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>spotbugs-console</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>sh</executable>
+                            <arguments>
+                                <argument>-c</argument>
+                                <argument>
+                                    if [ -f "${project.build.directory}/spotbugsXml.xml" ]; then
+                                        echo "";
+                                        echo "[INFO] SpotBugs Analysis Results:";
+                                        grep -o '&lt;BugInstance[^&gt;]*&gt;.*&lt;/BugInstance&gt;' "${project.build.directory}/spotbugsXml.xml" | while read -r bug; do
+                                            type=$(echo "$bug" | sed 's/.*type="\([^"]*\)".*/\1/');
+                                            priority=$(echo "$bug" | sed 's/.*priority="\([^"]*\)".*/\1/');
+                                            shortmsg=$(echo "$bug" | sed 's/.*&lt;ShortMessage&gt;\([^&lt;]*\)&lt;\/ShortMessage&gt;.*/\1/' | sed 's/&amp;lt;/&lt;/g; s/&amp;gt;/&gt;/g; s/&amp;amp;/\&amp;/g');
+                                            sourceline=$(echo "$bug" | grep -o '&lt;SourceLine[^&gt;]*&gt;' | head -1 | sed 's/.*sourcefile="\([^"]*\)".*start="\([^"]*\)".*/\1:\2/');
+                                            case $priority in
+                                                1) prio="HIGH";;
+                                                2) prio="MEDIUM";;
+                                                *) prio="LOW";;
+                                            esac;
+                                            printf "[WARN] %s (%s): %s at %s\n" "$type" "$prio" "$shortmsg" "$sourceline";
+                                        done;
+                                    fi
+                                </argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs.version}</version>
+                <executions>
+                    <execution>
+                        <id>spotbugs-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>spotbugs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <xmlOutput>true</xmlOutput>
+                    <xmlOutputDirectory>${project.build.directory}</xmlOutputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                </configuration>
             </plugin>
         </plugins>
     </build>
